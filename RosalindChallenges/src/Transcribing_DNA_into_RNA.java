@@ -7,7 +7,7 @@
  */
 public class Transcribing_DNA_into_RNA {
 	/*
-	 * counts characters
+	 * gets RNA
 	 */
 	public static String getRNA(String nucleoData){
 		String rNA = "";
