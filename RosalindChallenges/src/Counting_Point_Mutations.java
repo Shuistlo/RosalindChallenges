@@ -24,5 +24,7 @@ public class Counting_Point_Mutations {
 		String[] mutations = nTC.getFile().split("\n");
 		
 		System.out.println(findMutations(mutations[0], mutations[1]));
+		double f = 2972.0;
+		System.out.println(f/5.20000);
 	}
 }
