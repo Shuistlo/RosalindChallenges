@@ -6,65 +6,122 @@
  
 public class Translating_RNA_into_Protein {
 
-	//works
-	public static boolean validateF(String maybeF){
-		return maybeF.matches("UU[U|C]");
-	}
-	//works
-	//warning contains C
-	public static boolean validateL(String maybeL){
-		return maybeL.matches("(CU[U|C|A|G])|(UU[A|G])");
-	}
-	//works
-	//warning contains A
-	public static boolean validateS(String maybeS){
-		return maybeS.matches("(UC[U|C|A|G])|(AG[U|C])");
-	}
-	//works
-	public static boolean validateY(String maybeY){
-		return maybeY.matches("UA[U|C]");
-	}
-	
-	public static boolean validateStop(String maybeStop){
-		return maybeStop.matches("UA[A|G]|UGA");
-	}
-	
-	public static boolean validateC(String maybeC){
-		return maybeC.matches("UG[U|C]");
-	}
-	
-	
-	//W  - UGG and M - AUG special cases (only 1 combination)
-	
-	//===============================================AND SO THE C START BEGINS================================
-	
-	public static boolean validateP(String maybeP){
-		return maybeP.matches("CC[U|C|A|G]");
-	}
-	
-	public static boolean validateH(String maybeH){
-		return maybeH.matches("CA[U|C]");
-	}
-	
-	public static boolean validateQ(String maybeQ){
-		return maybeQ.matches("CA[A|G]");
+	public static String findUMatch(String maybeU){
+		String match = "";
+		if(maybeU.matches("UU[U|C]")){
+			match = "F";
+		}
+		if(maybeU.matches("(CU[U|C|A|G])|(UU[A|G])")){
+			match = "L";
+		}
+		if(maybeU.matches("(UC[U|C|A|G])|(AG[U|C])")){
+			match = "S";
+		}
+		if(maybeU.matches("UA[U|C]")){
+			match = "Y";
+		}
+		if(maybeU.matches("UA[A|G]|UGA")){
+			match = "stop";
+		}
+		if(maybeU.matches("UG[U|C]")){
+			match = "C";
+		}
+		if(maybeU.matches("UGG")){
+			match = "W";
+		}
+		return match;
 	}
 
-	//warning contains A
-	public static boolean validateR(String maybeR){
-		return maybeR.matches("CG[C|G|U|A]|AG[A|G]");
+	public static String findCMatch(String maybeC){
+		String match = "";
+		if(maybeC.matches("CC[U|C|A|G]")){
+			match = "P";
+		}
+		if(maybeC.matches("CA[U|C]")){
+			match = "H";
+		}
+		if(maybeC.matches("CG[C|G|U|A]|AG[A|G]")){
+			match = "R";
+		}
+		if(maybeC.matches("CA[A|G]")){
+			match = "Q"; //CA[A|G]
+		}
+		return match;
 	}
 	
-	public static boolean validateI(String maybeI){
-		return maybeI.matches("AU[U|C|A]");
+	public static String findAMatch(String maybeA){
+		String match = "";
+		if(maybeA.matches("AU[U|C|A]")){
+			match = "I";
+		}
+		if(maybeA.matches("AC[A|U|C|G]")){
+			match = "T";
+		}
+		if(maybeA.matches("AA[U|C]")){
+			match = "N";
+		}
+		if(maybeA.matches("AA[A|G]")){
+			match = "K";
+		}
+		if(maybeA.matches("(UC[U|C|A|G])|(AG[U|C])")){
+			match = "S";
+		}
+		if(maybeA.matches("CG[C|G|U|A]|AG[A|G]")){
+			match = "R";
+		}
+		if(maybeA.matches("AUG")){
+			match = "M";
+		}
+		return match;
+	}
+	//
+	public static String findGMatch(String maybeG){
+		String match = "";
+		if(maybeG.matches("GU[U|A|C|G]")){
+			match = "V";
+		}
+		if(maybeG.matches("GC[U|A|C|G]")){
+			match = "A";
+		}
+		if(maybeG.matches("GA[U|C]")){
+			match = "D";
+		}
+		if(maybeG.matches("GA[A|G]")){
+			match = "E";
+		}
+		if(maybeG.matches("GG[A|G|C|U]")){
+			match = "G";
+		}
+		return match;
 	}
 	
-	public static boolean validateT(String maybeT){
-		return maybeT.matches("AC[A|U|C|G]");
+	public static String findMatch(String rna){
+		String match = "";
+		switch(rna.charAt(0)){
+			case 'A': match = findAMatch(rna);
+					break;
+			case 'C': match = findCMatch(rna);
+					break;
+			case 'G': match = findGMatch(rna);
+					break;
+			case 'U': match = findUMatch(rna);
+					break;
+		}
+		return match;
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(validateF("UUA"));
-		System.out.println(validateS("AGA"));
+		textConverter nTC = new textConverter("C://Users//aredp//Downloads//rosalind_prot.txt"); //requires file name still
+		String rna = nTC.getFile().replace("\n", "").replace("\r", "");
+		String shortHand = "";
+		
+		int i = 0;
+		while((i+3) < rna.length()){
+			System.out.println(i);
+			shortHand = shortHand + findMatch(rna.substring(i, i+3));
+			i +=3;
+		}
+		System.out.println(shortHand);
 	}
 }
+
