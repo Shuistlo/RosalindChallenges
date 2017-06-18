@@ -5,11 +5,11 @@ import java.io.*;
  */
 
 
-public class textConverter{
+public class TextConverter{
 	private String filePath;
 	private String stringFile;
 	
-	public textConverter(String nFilePath){
+	public TextConverter(String nFilePath){
 		this.filePath = nFilePath;
 		this.stringFile = "";
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {

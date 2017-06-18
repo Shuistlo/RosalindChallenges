@@ -20,7 +20,7 @@ public class Counting_Point_Mutations {
 	
 	public static void main(String[] args) {
 		
-		textConverter nTC = new textConverter("C://Users//aredp//Downloads//rosalind_hamm.txt"); //requires file name still
+		TextConverter nTC = new TextConverter("C://Users//aredp//Downloads//rosalind_hamm.txt"); //requires file name still
 		String[] mutations = nTC.getFile().split("\n");
 		
 		System.out.println(findMutations(mutations[0], mutations[1]));

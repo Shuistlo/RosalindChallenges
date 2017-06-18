@@ -6,12 +6,13 @@
  
 public class Translating_RNA_into_Protein {
 
+	//matches u
 	public static String findUMatch(String maybeU){
 		String match = "";
 		if(maybeU.matches("UU[U|C]")){
 			match = "F";
 		}
-		if(maybeU.matches("(CU[U|C|A|G])|(UU[A|G])")){
+		if(maybeU.matches("UU[A|G]")){
 			match = "L";
 		}
 		if(maybeU.matches("(UC[U|C|A|G])|(AG[U|C])")){
@@ -32,6 +33,7 @@ public class Translating_RNA_into_Protein {
 		return match;
 	}
 
+	//matches c
 	public static String findCMatch(String maybeC){
 		String match = "";
 		if(maybeC.matches("CC[U|C|A|G]")){
@@ -46,9 +48,13 @@ public class Translating_RNA_into_Protein {
 		if(maybeC.matches("CA[A|G]")){
 			match = "Q"; //CA[A|G]
 		}
+		if(maybeC.matches("CU[U|C|A|G]")){
+			match = "L";
+		}
 		return match;
 	}
 	
+	//matches a
 	public static String findAMatch(String maybeA){
 		String match = "";
 		if(maybeA.matches("AU[U|C|A]")){
@@ -74,7 +80,8 @@ public class Translating_RNA_into_Protein {
 		}
 		return match;
 	}
-	//
+	
+	//matches g
 	public static String findGMatch(String maybeG){
 		String match = "";
 		if(maybeG.matches("GU[U|A|C|G]")){
@@ -95,6 +102,7 @@ public class Translating_RNA_into_Protein {
 		return match;
 	}
 	
+	//finds match
 	public static String findMatch(String rna){
 		String match = "";
 		switch(rna.charAt(0)){
@@ -111,13 +119,12 @@ public class Translating_RNA_into_Protein {
 	}
 	
 	public static void main(String[] args) {
-		textConverter nTC = new textConverter("C://Users//aredp//Downloads//rosalind_prot.txt"); //requires file name still
+		TextConverter nTC = new TextConverter("C://Users//aredp//Downloads//rosalind_prot.txt"); //requires file name still
 		String rna = nTC.getFile().replace("\n", "").replace("\r", "");
 		String shortHand = "";
-		
+		System.out.println(findUMatch("UUC"));
 		int i = 0;
-		while((i+3) < rna.length()){
-			System.out.println(i);
+		while(((i+3) < rna.length()) || ((i+3) == rna.length())){
 			shortHand = shortHand + findMatch(rna.substring(i, i+3));
 			i +=3;
 		}

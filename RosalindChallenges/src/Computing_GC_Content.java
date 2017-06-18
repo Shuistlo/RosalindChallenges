@@ -46,7 +46,7 @@ public class Computing_GC_Content {
 	
 	public static void main(String[] args) {
 		
-		textConverter nTC = new textConverter("C://Users//aredp//Downloads//rosalind_gc.txt"); //requires file name still
+		TextConverter nTC = new TextConverter("C://Users//aredp//Downloads//rosalind_gc.txt"); //requires file name still
 		String[] gcTextByData = nTC.getFile().split(">");
 		for(int i = 0; i < gcTextByData.length; i++){
 			gcTextByData[i]=gcTextByData[i].replace("\n", "").replace("\r", "");

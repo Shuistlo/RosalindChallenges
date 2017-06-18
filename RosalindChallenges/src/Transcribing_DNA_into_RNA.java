@@ -23,7 +23,7 @@ public class Transcribing_DNA_into_RNA {
 	}
 	
 	public static void main(String[] args) {
-		textConverter nTC = new textConverter("C://Users//aredp//Downloads//rosalind_rna.txt"); //requires file name still
+		TextConverter nTC = new TextConverter("C://Users//aredp//Downloads//rosalind_rna.txt"); //requires file name still
 		System.out.println(getRNA(nTC.getFile()));
 	}
 
