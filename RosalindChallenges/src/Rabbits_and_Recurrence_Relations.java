@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 /*
  * Problem
  *A sequence is an ordered collection of objects (usually numbers), which are allowed to repeat. Sequences can be finite or infinite. Two examples are the finite sequence (UTC) and the infinite sequence of odd numbers (1,3,5,7,9,…)(1,3,5,7,9,…). We use the notation anan to represent the nn-th term of a sequence.
@@ -6,24 +8,36 @@
  */
 public class Rabbits_and_Recurrence_Relations {
 
-	public int getRabbits(String pairMonth) {
-		String[] pairMonthArray = pairMonth.split(" ");
-		int initPairs = Integer.parseInt(pairMonthArray[0]);
-		int months = Integer.parseInt(pairMonthArray[1]);
+	//gets rabbits
+	public static BigInteger getRabbits(int n, int k) {
+		BigInteger initPairs = new BigInteger(n +"");
+		BigInteger months = new BigInteger(k + "");
 		
-		if((months < 0) || (months ==0)){
-			return initPairs;
+		BigInteger now = new BigInteger("1");
+		BigInteger lastMonth = new BigInteger("1");
+		BigInteger i = new BigInteger("2");
+		BigInteger temp = new BigInteger("0");
+		BigInteger constant = new BigInteger("1");
+		
+		while(i.intValueExact() < initPairs.intValueExact()){
+			temp = now;
+			now = now.add(lastMonth.multiply(months));
+			lastMonth = temp;
+			i.add(constant);
 		}
 		
-		if(months == 1){
-			//initPairs = initPairs + ;
-		}
-		//next = current + previous + previousprevious - (previouspreviousprevious)
-		//offspring = F(n-2)
-		//F(n) = F(n-1) + F(n-2) - F(n-3)
-		// TODO Auto-generated constructor stub
+		return now;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(getRabbits(5,3));
+		System.out.println(getRabbits(36,3));
 		
-		return initPairs;
+		TextConverter nTC = new TextConverter("C://Users//aredp//Downloads//rosalind_fib.txt"); //requires file name still
+		String data = nTC.getFile();
+		data = data.replace("\n", "").replace("\r", "");
+		String[] dataString = data.split(" ");
+		System.out.println(getRabbits(Integer.parseInt(dataString[0]), Integer.parseInt(dataString[1])));
 	}
 
 }
